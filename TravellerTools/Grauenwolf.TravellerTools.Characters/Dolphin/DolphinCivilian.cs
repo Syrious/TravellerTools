@@ -192,7 +192,7 @@ abstract class DolphinCivilian(string assignment, SpeciesCharacterBuilder specie
                 return;
 
             case 5:
-                character.AddHistory($"An accident leaves {character.Name} caught on land without a travel suit. {character.Name} suffer serious dehydration and \r\nrequire lengthy hospitalisation.", age);
+                character.AddHistory($"An accident leaves {character.Name} caught on land without a travel suit. {character.Name} suffer serious dehydration and \r\nrequire lengthy hospitalization.", age);
                 character.Endurance += -2;
                 return;
 

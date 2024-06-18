@@ -111,8 +111,8 @@ public class CharacterBuilder
     /// Creates the character with a desired final career.
     /// </summary>
     /// <param name="careerList">The list of desired careers and/or assignments.</param>
-    public Character CreateCharacter(Dice dice, ISpeciesSettings speciesSettings, CareerTypes careerType) =>
-        CreateCharacter(dice, careerType, speciesSettings.SpeciesOrFaction, speciesSettings.PercentOfOtherSpecies);
+    public Character CreateCharacter(Dice dice, ISpeciesSettings? speciesSettings, CareerTypes careerType) =>
+        CreateCharacter(dice, careerType, speciesSettings?.SpeciesOrFaction, speciesSettings?.PercentOfOtherSpecies);
 
     /// <summary>
     /// Creates the character with a desired final career.
@@ -163,10 +163,36 @@ public class CharacterBuilder
     }
 
     /// <summary>
+    /// Creates the character stub.
+    /// </summary>
+    /// <param name="dice">The dice.</param>
+    /// <param name="speciesOrFaction">The species or faction.</param>
+    /// <param name="percentOfOtherSpecies">The percent of other species form 0 to 100, default 0.</param>
+    /// <param name="genderCode">The gender code.</param>
+    /// <param name="noChildren">if set to true, children will not be generated.</param>
+    /// <returns>CharacterBuilderOptions.</returns>
+    public CharacterBuilderOptions CreateCharacterStub(Dice dice, string? speciesOrFaction = null, int? percentOfOtherSpecies = null, string? genderCode = null, AgeClass ageClass = AgeClass.None)
+    {
+        var options = new CharacterBuilderOptions();
+        options.Species = GetRandomSpecies(dice, speciesOrFaction, percentOfOtherSpecies);
+        var builder = GetCharacterBuilder(options.Species, dice);
+        options.Species = builder.Species; //Copy back in case it was a faction
+
+        options.Gender = genderCode ?? dice.Choose(builder.Genders).GenderCode;
+
+        options.Name = builder.GenerateName(dice, options.Gender);
+
+        options.MaxAge = builder.RandomAge(dice, ageClass);
+
+        options.Seed = dice.Next();
+        return options;
+    }
+
+    /// <summary>
     /// Creates the character with a desired final career.
     /// </summary>
     /// <param name="careerList">The list of desired careers and/or assignments.</param>
-    public Character CreateCharacter(Dice dice, ISpeciesSettings speciesSettings, string career)
+    public Character CreateCharacterWithCareer(Dice dice, ISpeciesSettings speciesSettings, string career)
     {
         var characters = new List<Character>();
 
@@ -208,32 +234,6 @@ public class CharacterBuilder
 
             return sortedList.First().Character;
         }
-    }
-
-    /// <summary>
-    /// Creates the character stub.
-    /// </summary>
-    /// <param name="dice">The dice.</param>
-    /// <param name="speciesOrFaction">The species or faction.</param>
-    /// <param name="percentOfOtherSpecies">The percent of other species form 0 to 100, default 0.</param>
-    /// <param name="genderCode">The gender code.</param>
-    /// <param name="noChildren">if set to true, children will not be generated.</param>
-    /// <returns>CharacterBuilderOptions.</returns>
-    public CharacterBuilderOptions CreateCharacterStub(Dice dice, string? speciesOrFaction = null, int? percentOfOtherSpecies = null, string? genderCode = null, AgeClass ageClass = AgeClass.None)
-    {
-        var options = new CharacterBuilderOptions();
-        options.Species = GetRandomSpecies(dice, speciesOrFaction, percentOfOtherSpecies);
-        var builder = GetCharacterBuilder(options.Species, dice);
-        options.Species = builder.Species; //Copy back in case it was a faction
-
-        options.Gender = genderCode ?? dice.Choose(builder.Genders).GenderCode;
-
-        options.Name = builder.GenerateName(dice, options.Gender);
-
-        options.MaxAge = builder.RandomAge(dice, ageClass);
-
-        options.Seed = dice.Next();
-        return options;
     }
 
     /// <summary>

@@ -316,7 +316,7 @@ partial class EncounterGenerator
 
             case 5:
                 result.Add("A reporter wants to interview the travellers.");
-                result.Add("Journalist", CharacterBuilder.CreateCharacter(dice, settings, "Journalist"));
+                result.Add("Journalist", CharacterBuilder.CreateCharacterWithCareer(dice, settings, "Journalist"));
                 break;
 
             case 6:
@@ -486,7 +486,7 @@ partial class EncounterGenerator
                 switch (dice.D(6))
                 {
                     case 1:
-                        result.Add($"Targeted for a sing operation. They are offered stolen goods. {LegalTradeGood(dice)}");
+                        result.Add($"Targeted for a sing operation. They are offered stolen goods. {LegalTradeGood(dice).Name}");
                         result.Add("Fake Dealer", CharacterBuilder.CreateCharacter(dice, settings, AgeClass.Adult));
                         result.Add("Lead Officer", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.StarportOfficer));
                         break;
@@ -524,7 +524,6 @@ partial class EncounterGenerator
                 break;
 
             case 6:
-                result.Add("Outbreak of Violence");
                 switch (dice.D(6))
                 {
                     case 1:
@@ -575,7 +574,6 @@ partial class EncounterGenerator
                 break;
 
             case 8:
-                result.Add("Alien tech");
                 switch (dice.D(6))
                 {
                     case 1 or 2:
@@ -608,7 +606,6 @@ partial class EncounterGenerator
                 break;
 
             case 10:
-                result.Add("Infestation");
                 switch (dice.D(6))
                 {
                     case 1: result.Add("A hardy type of cockroach is nesting in the station and threatens to infect the ship."); break;
@@ -632,6 +629,7 @@ partial class EncounterGenerator
 
             case 12:
                 result.Add("Asked to bring ship close to the sun to observe a solar flare.");
+                result.Add("Scientist", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.FieldScience));
                 break;
 
             case 13:

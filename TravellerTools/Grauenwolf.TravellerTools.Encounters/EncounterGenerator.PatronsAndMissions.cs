@@ -11,46 +11,44 @@ partial class EncounterGenerator
 
         encounter ??= new Encounter() { Title = "Allies and Enemies" };
 
-        //TODO: Add name generator
-
         switch (dice.D66())
         {
-            case 11: encounter.Add($"Naval Officer"); break;
+            case 11: encounter.Add($"Naval Officer", CharacterBuilder.CreateCharacter(dice, CareerTypes.MilitaryNavy)); break;
             case 12: encounter.Add($"Imperial Diplomat", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Diplomat)); break;
             case 13: encounter.Add($"Crooked Trader", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.ShadyGoodsTrader)); break;
             case 14: encounter.Add($"Medical Doctor", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Healer)); break;
             case 15: encounter.Add($"Eccentric Scientist", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Science)); break;
-            case 16: encounter.Add($"Mercenary"); break;
+            case 16: encounter.Add($"Mercenary", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.ViolentNonMilitary)); break;
             case 21: encounter.Add($"Famous Performer", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.ArtistOrPerformer)); break;
             case 22: encounter.Add($"Alien Thief", CharacterBuilder.CreateCharacter(dice, CareerTypes.Illegal)); break;
-            case 23: encounter.Add($"Free Trader"); break;
-            case 24: encounter.Add($"Explorer"); break;
-            case 25: encounter.Add($"Marine Captain"); break;
-            case 26: encounter.Add($"Corporate Executive"); break;
+            case 23: encounter.Add($"Free Trader", CharacterBuilder.CreateCharacter(dice, CareerTypes.FreeTrader)); break;
+            case 24: encounter.Add($"Explorer", CharacterBuilder.CreateCharacter(dice, CareerTypes.FieldScience)); break;
+            case 25: encounter.Add($"Marine Captain", CharacterBuilder.CreateCharacter(dice, CareerTypes.Military)); break;
+            case 26: encounter.Add($"Corporate Executive", CharacterBuilder.CreateCharacter(dice, CareerTypes.Corporate)); break;
             case 31: encounter.Add($"Researcher", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Science)); break;
             case 32: encounter.Add($"Cultural Attaché", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Diplomat)); break;
             case 33: encounter.Add($"Religious Leader", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Religious)); break;
-            case 34: encounter.Add($"Conspirator"); break;
-            case 35: encounter.Add($"Rich Noble"); break;
+            case 34: encounter.Add($"Conspirator", CharacterBuilder.CreateCharacter(dice, settings)); break;
+            case 35: encounter.Add($"Rich Noble", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Noble)); break;
             case 36: encounter.Add($"Artificial Intelligence"); break;
-            case 41: encounter.Add($"Bored Noble"); break;
-            case 42: encounter.Add($"Planetary Governor"); break;
-            case 43: encounter.Add($"Inveterate Gambler"); break;
-            case 44: encounter.Add($"Crusading Journalist"); break;
+            case 41: encounter.Add($"Bored Noble", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Noble)); break;
+            case 42: encounter.Add($"Planetary Governor", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Noble)); break;
+            case 43: encounter.Add($"Inveterate Gambler", CharacterBuilder.CreateCharacterWithSkill(dice, settings, "Gambler")); break;
+            case 44: encounter.Add($"Crusading Journalist", CharacterBuilder.CreateCharacterWithCareer(dice, settings, "Journalist")); break;
             case 45: encounter.Add($"Doomsday Cultist", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Religious)); break;
-            case 46: encounter.Add($"Corporate Agent"); break;
+            case 46: encounter.Add($"Corporate Agent", CharacterBuilder.CreateCharacterWithCareer(dice, settings, "Corporate Agent")); break;
             case 51: encounter.Add($"Criminal Syndicate", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Illegal)); break;
-            case 52: encounter.Add($"Military Governor"); break;
-            case 53: encounter.Add($"Army Quartermaster"); break;
-            case 54: encounter.Add($"Private Investigator"); break;
+            case 52: encounter.Add($"Military Governor", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Military)); break;
+            case 53: encounter.Add($"Army Quartermaster", CharacterBuilder.CreateCharacterWithCareer(dice, settings, "Army")); break;
+            case 54: encounter.Add($"Private Investigator", CharacterBuilder.CreateCharacter(dice, settings)); break;
             case 55: encounter.Add($"Starport Administrator", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.StarportEmployee)); break;
-            case 56: encounter.Add($"Retired Admiral"); break;
-            case 61: encounter.Add($"Alien Ambassador"); break;
+            case 56: encounter.Add($"Retired Admiral", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.MilitaryNavy)); break;
+            case 61: encounter.Add($"Alien Ambassador", CharacterBuilder.CreateCharacter(dice, null, CareerTypes.Diplomat)); break;
             case 62: encounter.Add($"Smuggler", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.ShadyGoodsTrader)); break;
             case 63: encounter.Add($"Weapons Inspector", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.StarportEmployee)); break;
-            case 64: encounter.Add($"Elder Statesman"); break;
-            case 65: encounter.Add($"Planetary Warlord"); break;
-            case 66: encounter.Add($"Imperial Agent"); break;
+            case 64: encounter.Add($"Elder Statesman", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Noble)); break;
+            case 65: encounter.Add($"Planetary Warlord", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.ViolentNonMilitary)); break;
+            case 66: encounter.Add($"Imperial Agent", CharacterBuilder.CreateCharacter(dice, settings, CareerTypes.Spy)); break;
         }
         return encounter;
     }
