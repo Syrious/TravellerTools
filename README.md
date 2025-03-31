@@ -2,7 +2,7 @@
 Tools for the Traveller RPG
 
 # Local run
-- Go to  https://dotnet.microsoft.com/en-us/download/dotnet/6.0 and download
+- Go to  https://dotnet.microsoft.com/en-us/download/dotnet (tested with 9.0) and download
   - SDK
   - .NET Runtime (not Desktop I guess)
   - ASP.NET Core Runtime
