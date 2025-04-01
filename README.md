@@ -34,4 +34,5 @@ There a multiple ways you can run this tool.
 # Issues
 I could not get the build step inside the Dockerfile to work. After buildiung and starting the app is there but the style is totally messed up. If anyone knows how to fix it, please contact me. 
 
-
+# Disclaimer
+I did not implement any of this code. This repository is just a fork. Please do not ask if I can fix anything.
