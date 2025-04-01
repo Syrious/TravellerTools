@@ -23,13 +23,15 @@ There a multiple ways you can run this tool.
 - `dotnet restore` to ensure all dependencies are restored
 - `dotnet publish Grauenwolf.TravellerTools.Web/Grauenwolf.TravellerTools.Web.csproj -c Release -o publish`
 - Go into publish folder and execute `Grauenwolf.TravellerTools.Web.exe`
+- Now open a browser and head to https://localhost:5001/
 
 ### Docker-Container
 - Get the same dependecies as above
 - `dotnet restore` to ensure all dependencies are restored
 - `dotnet publish Grauenwolf.TravellerTools.Web/Grauenwolf.TravellerTools.Web.csproj -c Release -o publish`
 - `docker build -t traveller-tools .`
-- `docker run --rm -it -p 8080:8080 --name traveller-tools traveller-tools`
+- `docker run -p 8080:8080 --name traveller-tools traveller-tools`
+- Now open a browser and head to https://localhost:8080/
 
 # Issues
 I could not get the build step inside the Dockerfile to work. After buildiung and starting the app is there but the style is totally messed up. If anyone knows how to fix it, please contact me. 
