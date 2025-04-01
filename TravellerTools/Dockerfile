@@ -6,8 +6,6 @@ WORKDIR /src
 
 # Copy the solution file and .csproj files into the container
 COPY *.sln ./
-COPY .cr/ ./
-COPY api.js ./
 COPY Grauenwolf.TravellerTools.Animals/*.csproj ./Grauenwolf.TravellerTools.Animals/
 COPY Grauenwolf.TravellerTools.Characters/*.csproj ./Grauenwolf.TravellerTools.Characters/
 COPY Grauenwolf.TravellerTools.Encounters/*.csproj ./Grauenwolf.TravellerTools.Encounters/
@@ -26,7 +24,7 @@ RUN dotnet restore
 COPY . .
 
 # Build the app in release mode and publish it
-RUN dotnet publish "Grauenwolf.TravellerTools.Web/Grauenwolf.TravellerTools.Web.csproj" -c Release -o /app/publish
+RUN dotnet publish "Grauenwolf.TravellerTools.Web/Grauenwolf.TravellerTools.Web.csproj" -c Release -o /publish-output
 
 # Use the .NET runtime image to run the app
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
@@ -35,7 +33,7 @@ WORKDIR /app
 # Set environment variables for proper app behavior
 ENV ASPNETCORE_ENVIRONMENT=Production
 
-COPY --from=build /app/publish .
+COPY --from=build /publish-output .
 
 # Launch the app
 ENTRYPOINT ["dotnet", "Grauenwolf.TravellerTools.Web.dll"]
